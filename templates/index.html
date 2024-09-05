@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber File Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Cyber File Analysis</h1>
+        <div id="uploadForm">
+            <form id="fileUploadForm" action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+                <label for="file">Upload File:</label>
+                <input type="file" name="file" id="file" required>
+                <button type="submit">Upload and Scan</button>
+            </form>
+        </div>
+        <div id="hashForm">
+            <form id="fileHashForm" action="{{ url_for('check_hash') }}" method="POST">
+                <label for="file_hash">Check File Hash:</label>
+                <input type="text" name="file_hash" id="file_hash" placeholder="Enter file hash" required>
+                <button type="submit">Check Hash</button>
+            </form>
+        </div>
+        <div id="result" style="display: none;">
+            <h2>Analysis Results</h2>
+            <div id="resultContent"></div>
+            <button id="scanAnother" class="btn">Scan Another File</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#fileUploadForm').on('submit', function(event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.error) {
+                            $('#resultContent').html('<p style="color: red;">' + response.error + '</p>');
+                        } else {
+                            $('#resultContent').html(response.result);
+                        }
+                        $('#result').show();
+                        $('#uploadForm').hide();
+                        $('#hashForm').hide();
+                    }
+                });
+            });
+
+            $('#fileHashForm').on('submit', function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.error) {
+                            $('#resultContent').html('<p style="color: red;">' + response.error + '</p>');
+                        } else {
+                            $('#resultContent').html(response.result);
+                        }
+                        $('#result').show();
+                        $('#uploadForm').hide();
+                        $('#hashForm').hide();
+                    }
+                });
+            });
+
+            $('#scanAnother').on('click', function() {
+                $('#result').hide();
+                $('#uploadForm').show();
+                $('#hashForm').show();
+            });
+        });
+    </script>
+</body>
+</html>

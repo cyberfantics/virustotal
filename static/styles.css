@@ -1,0 +1,220 @@
+/* Base styles */
+:root {
+    --bg-color: #0d0d0d;
+    --primary-color: #00ffcc;
+    --secondary-color: #00b3b3;
+    --text-color: #00ffcc;
+    --border-color: #00ffcc;
+    --hover-color: #009999;
+    --font-family: 'Consolas', 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px var(--primary-color);
+    border: 2px solid var(--border-color);
+    text-align: center;
+    margin: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 10px;
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+/* File and text input styles */
+input[type="file"], input[type="text"] {
+    width: 100%;
+    background-color: #262626;
+    border: 1px solid #00b3b3;
+    border-radius: 5px;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+input[type="text"] {
+    height: 50px;
+    text-align: center;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: 2px solid var(--primary-color);
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+}
+
+input[type="file"]::before, input[type="text"]::before {
+    content: 'Choose File';
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #262626;
+    border: 1px solid #00b3b3;
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+input[type="file"]:focus::before {
+    content: 'File Selected';
+}
+
+/* Button styles */
+button, .btn {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: 2px solid var(--primary-color);
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    font-family: var(--font-family);
+    background-color: #1a1a1a;
+    border: 2px solid var(--border-color);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    color: var(--text-color);
+}
+
+th {
+    background-color: var(--bg-color);
+    color: var(--secondary-color);
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #262626;
+}
+
+tr:hover {
+    background-color: #333333;
+}
+
+/* Custom classes for keys and values */
+.key {
+    font-weight: bold;
+    color: #00ccff; /* Cyan color for keys */
+}
+
+.value {
+    color: #ff0066; /* Magenta color for values */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+
+    input[type="file"],
+    input[type="text"],
+    button,
+    .btn {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input[type="file"],
+    input[type="text"],
+    button,
+    .btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    th, td {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
